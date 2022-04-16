@@ -1,13 +1,65 @@
-Version: 1.0
+---
+title: "Linear Regression Quiz"
+author: "Mine Dogucu"
+output: html_document
+---
 
-RestoreWorkspace: Default
-SaveWorkspace: Default
-AlwaysSaveHistory: Default
+```{r message = FALSE}
+library(tidyverse)
+library(broom)
+student <- read.csv("https://www.openintro.org/data/csv/satgpa.csv")
+```
 
-EnableCodeIndexing: Yes
-UseSpacesForTab: Yes
-NumSpacesForTab: 2
-Encoding: UTF-8
+You will see multiple choice questions in this quiz. You can answer by making the correct choice bold or simply writing the correct answer.
 
-RnwWeave: Sweave
-LaTeX: pdfLaTeX
+## Question 1
+
+Consider the simple linear regression equation:
+$$y_i = \beta_0 + \beta_1 x_i + \epsilon_i$$
+
+#### Question 1.a
+
+$\beta_1$ is the
+
+a. slope  
+b. *intercept*  
+c. residual
+
+### Question 1.b 
+
+Provide the interpretation of $\beta_1$.
+
+It is the value when x is zero.
+
+## Question 2
+
+You will see that you are provided with a data frame called `student`. In this data frame, we will first work on the relationship between first-year college GPA (`fy_gpa`) and high school GPA (`hs_gpa`).
+
+Plot the relationship between the two variables. Remember that the explanatory variable should be on the x axis.
+
+```{r}
+ggplot(student, aes(x = fy_gpa, y = hs_gpa)) +
+  geom_boxplot()
+```
+
+## Question 3
+
+Fit a linear regression model predicting first-year college GPA with high school GPA.  Make sure to name your model `model_gpa`.  
+
+```{r}
+fit <- lm(hs_gpa ~ fy_gpa, data = student)
+```
+
+### Question 3.a  
+
+List the simple linear regression model assumptions and check them to determine if any appear to be violated for this model. Skip the independence assumption since we do not know where this data came from. Provide evidence for your conclusions.
+
+#### Question 3.b
+
+Assume all model assumptions hold. What is the estimate of the slope? Provide an interpretation of the slope in context.
+
+```{r}
+summary(fit)
+```
+
+The slope is the expected change in y for a one unit increase in x.
